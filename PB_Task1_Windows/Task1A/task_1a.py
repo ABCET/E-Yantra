@@ -15,8 +15,8 @@
 *****************************************************************************************
 '''
 
-# Team ID:			[ Team-ID ]
-# Author List:		[ Names of team members worked on this file separated by Comma: Name1, Name2, ... ]
+# Team ID:			PB_#3275
+# Author List:		Mathew V. Kariath, Rajath Thomas Kurain, Abhishek S, Alen Rajesh C.
 # Filename:			task_1a.py
 # Functions:		detect_traffic_signals, detect_horizontal_roads_under_construction, detect_vertical_roads_under_construction,
 #					detect_medicine_packages, detect_arena_parameters
