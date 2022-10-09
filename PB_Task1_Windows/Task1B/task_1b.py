@@ -101,7 +101,18 @@ def detect_ArUco_details(image):
     ArUco_corners = {}
     
     ##############	ADD YOUR CODE HERE	##############
-   
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  #convert to gray
+    arucoDict=aruco.Dictionary_get(aruco.DICT_5X5_50)
+    arucoParams = aruco.DetectorParameters_create()
+    corners, ids, _ = aruco.detectMarkers(gray, arucoDict, parameters =  arucoParams)
+    for i in range(len(ids)):
+        temp=[]
+        temp.append(int(np.sum(corners[i][:,:,0])//4))
+        temp.append(int(np.sum(corners[i][:,:,1])//4))
+        print(ids[i][0],end=":")
+        print(temp)
+        ArUco_corners[ids[i][0]]=corners[i][0,:,:].astype('int32').tolist()
+        ArUco_details_dict[ids[i][0]]=[temp,45]
     ##################################################
     
     return ArUco_details_dict, ArUco_corners 
