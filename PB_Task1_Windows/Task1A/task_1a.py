@@ -174,14 +174,14 @@ def detect_medicine_packages(maze_image):
 	---
 	medicine_packages = detect_medicine_packages(maze_image)
 	"""    
-  	medicine_packages = []
+	medicine_packages = []
 	
 	##############	ADD YOUR CODE HERE	##############
 	
-    	x=[130,130,170,170]
-    	y=[130,170,130,170]
-    	c=0
-    	for i in range(1,7):
+	x=[130,130,170,170]
+	y=[130,170,130,170]
+	c=0
+	for i in range(1,7):
 		shopno='Shop_'+str(i)
 		d=0
 		shape=''
@@ -190,27 +190,27 @@ def detect_medicine_packages(maze_image):
 			color=''
 			if (maze_image[x[j],y[j]]==[0,255,0]).all():
 				color="Green"
-				dt[color]=[x[j],y[j]]
+				
 			elif (maze_image[x[j],y[j]]==[0,127,255]).all():
 				color="Orange"
-				dt[color]=[x[j],y[j]]
+				
 			elif (maze_image[x[j],y[j]]==[180,0,255]).all():
 				color="Pink"
-				dt[color]=[x[j],y[j]]
+				
 			elif (maze_image[x[j],y[j]]==[255,255,0]).all():
 				color="Skyblue"
-				dt[color]=[x[j],y[j]]
+			dt[color]=[y[j],x[j]]
 			if color=="Green"or color=="Orange"or color=="Pink"or color=="Skyblue":
 				d+=1
 				if d==1:
 					if j==0 or j==1:
 						cropped_image =maze_image[110:150,110+(i-1)*100+j*40:150+(i-1)*100+j*40]
-				        else:
+					else:
 						cropped_image =maze_image[150:190,110+(i-1)*100+(j-2)*40:150+(i-1)*100+(j-2)*40]
-				    	imgGrey = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2GRAY)
-				   	 _, thrash = cv2.threshold(imgGrey, 240, 255, cv2.THRESH_BINARY_INV)
-				    	contour,_ = cv2.findContours(thrash, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-				   	for cnt in contour:
+					imgGrey = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2GRAY)
+					_, thrash = cv2.threshold(imgGrey, 240, 255, cv2.THRESH_BINARY_INV)
+					contour,_ = cv2.findContours(thrash, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+					for cnt in contour:
 						approx = cv2.approxPolyDP(cnt, 0.01* cv2.arcLength(cnt, True), True)
 						if len(approx)==3:
 							shape="Triangle"
@@ -218,16 +218,16 @@ def detect_medicine_packages(maze_image):
 							shape="Square"
 						else:
 							shape="Circle"
-		    	y[j]+=100 
+			y[j]+=100
 		for k in dt:
 			if dt[k]!=[0,0]:
-			medicine_packages.append([shopno,k,shape,dt[k]])     
+				medicine_packages.append([shopno,k,shape,dt[k]])     
 		if d>0:
 			c+=1
 			if c>3:
 				break  
-				
-    	return medicine_packages
+			
+	return medicine_packages
 
 	##################################################
 
