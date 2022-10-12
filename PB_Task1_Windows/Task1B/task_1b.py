@@ -114,10 +114,19 @@ def detect_ArUco_details(image):
         temp=[]
         temp.append(int(np.sum(corners[i][:,:,0])//4))
         temp.append(int(np.sum(corners[i][:,:,1])//4))
-        print(ids[i][0],end=":")
-        print(temp)
+        x_center = (np.sum(corners[i][:,:,0])//4)
+        y_center = (np.sum(corners[i][:,:,1])//4)
         ArUco_corners[ids[i][0]]=corners[i][0,:,:].astype('int32').tolist()
-        ArUco_details_dict[ids[i][0]]=[temp,45]
+        corner = ArUco_corners[int(ids[i])]
+        tl_tr_center_x = ((corner[0][0] + corner[1][0]) / 2)
+        tl_tr_center_y = ((corner[0][1] + corner[1][1]) / 2)   
+        del_x = (tl_tr_center_x-x_center)
+        del_y = -(tl_tr_center_y-y_center)
+        angle = int(math.degrees(math.atan2(((del_y)),((del_x)))))
+        angle-=90
+        if (del_x<0 and del_y<0):
+            angle=angle+360
+        ArUco_details_dict[ids[i][0]]=[temp,angle]
     ##################################################
     
     return ArUco_details_dict, ArUco_corners 
