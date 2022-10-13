@@ -67,12 +67,12 @@ def detect_Qr_details(image):
     Qr_codes_details = {}
 
     ##############	ADD YOUR CODE HERE	##############
-    for i in pyzbar.decode(img):
+    for i in pyzbar.decode(image):
         sum_x,sum_y=0,0
         for j in range(4):
             sum_x+=(i.polygon[j].x)
             sum_y+=(i.polygon[j].y)
-        Qr_codes_details[str(i.data)[1:].strip("'")]=[int(sum_x/4),int(sum_y/4)
+        Qr_codes_details[str(i.data)[1:].strip("'")]=[int(sum_x/4),int(sum_y/4)]
     ##################################################
     
     return Qr_codes_details    
@@ -126,7 +126,7 @@ def detect_ArUco_details(image):
         angle-=90
         if (del_x<0 and del_y<0):
             angle=angle+360
-        ArUco_details_dict[ids[i][0]]=[temp,angle]
+        ArUco_details_dict[int(ids[i][0])]=[temp,angle]
     ##################################################
     
     return ArUco_details_dict, ArUco_corners 
