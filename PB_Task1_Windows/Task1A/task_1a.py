@@ -174,7 +174,7 @@ def detect_medicine_packages(maze_image):
 	---
 	medicine_packages = detect_medicine_packages(maze_image)
 	"""    
-	medicine_packages = []
+	medicine_packages_present= []
 	
 	##############	ADD YOUR CODE HERE	##############
 	
@@ -221,13 +221,13 @@ def detect_medicine_packages(maze_image):
 			y[j]+=100
 		for k in dt:
 			if dt[k]!=[0,0]:
-				medicine_packages.append([shopno,k,shape,dt[k]])     
+				medicine_packages_present.append([shopno,k,shape,dt[k]])     
 		if d>0:
 			c+=1
 			if c>3:
 				break  
 			
-	return medicine_packages
+	return medicine_packages_present
 
 	##################################################
 
@@ -267,7 +267,7 @@ def detect_arena_parameters(maze_image):
 	arena_parameters['traffic_signals']=detect_traffic_signals(maze_image)
 	arena_parameters['horizontal_roads_under_construction']=detect_horizontal_roads_under_construction(maze_image)
 	arena_parameters['vertical_roads_under_construction']=detect_vertical_roads_under_construction(maze_image)
-	arena_parameters['medicine_packages']=detect_medicine_packages(maze_image)
+	arena_parameters['medicine_packages_present']=detect_medicine_packages(maze_image)
 	
 	##################################################
 	
